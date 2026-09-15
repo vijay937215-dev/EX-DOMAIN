@@ -1,10 +1,11 @@
-/* DOMAIN EXPANSION // AI COMMAND CENTER APPLICATION ENGINE */
+/* DOMAIN EXPANSION // QUANTUM AI COMMAND CENTER APPLICATION ENGINE */
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // ==================== 0. SCI-FI SOUND SYNTHESIZER (WEB AUDIO API) ====================
+    // ==================== 0. AUDIO SYNTHESIZER ENGINE ====================
     const AudioEngine = {
         ctx: null,
+        muted: false,
         init() {
             if (!this.ctx) {
                 const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         playBeep(freq = 800, type = 'sine', duration = 0.08) {
+            if (this.muted) return;
             try {
                 this.init();
                 if (!this.ctx) return;
@@ -25,11 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 gain.connect(this.ctx.destination);
                 osc.start();
                 osc.stop(this.ctx.currentTime + duration);
-            } catch (e) {
-                // Ignore audio restriction errors
-            }
+            } catch (e) {}
         },
         playGrantChime() {
+            if (this.muted) return;
             try {
                 this.init();
                 if (!this.ctx) return;
@@ -50,13 +51,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Attach click SFX to interactive elements
-    document.querySelectorAll('button, a, input').forEach(el => {
+    // Audio Toggle Button
+    const audioBtn = document.getElementById('audio-toggle-btn');
+    const audioIcon = document.getElementById('audio-icon');
+    if (audioBtn && audioIcon) {
+        audioBtn.addEventListener('click', () => {
+            AudioEngine.muted = !AudioEngine.muted;
+            if (AudioEngine.muted) {
+                audioIcon.setAttribute('data-lucide', 'volume-x');
+                audioBtn.classList.add('text-slate-500');
+            } else {
+                audioIcon.setAttribute('data-lucide', 'volume-2');
+                audioBtn.classList.remove('text-slate-500');
+                AudioEngine.playBeep(1000, 'sine', 0.1);
+            }
+            lucide.createIcons();
+        });
+    }
+
+    // Attach click SFX to buttons & links
+    document.querySelectorAll('button, a, input, select').forEach(el => {
         el.addEventListener('click', () => AudioEngine.playBeep(900, 'sine', 0.05));
     });
 
 
-    // ==================== 1. CINEMATIC INTRO ENGINE ====================
+    // ==================== 1. TELEMETRY PING SIMULATOR ====================
+    const pingEl = document.getElementById('telemetry-ping');
+    if (pingEl) {
+        setInterval(() => {
+            const p = Math.floor(Math.random() * 8) + 8;
+            pingEl.textContent = `${p}ms`;
+        }, 3000);
+    }
+
+
+    // ==================== 2. CINEMATIC INTRO ENGINE ====================
     const introEl = document.getElementById('cinematic-intro');
     const skipBtn = document.getElementById('skip-intro-btn');
     const stage1 = document.getElementById('intro-stage-1');
@@ -66,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let introEnded = false;
 
-    // Intro Particle Canvas
+    // Intro Canvas Animation
     const introCanvas = document.getElementById('intro-canvas');
     if (introCanvas) {
         const ctx = introCanvas.getContext('2d');
@@ -78,11 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
             height = introCanvas.height = window.innerHeight;
         });
 
-        const particles = Array.from({ length: 80 }, () => ({
+        const particles = Array.from({ length: 90 }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
             radius: Math.random() * 2 + 0.5,
-            speedY: -Math.random() * 1.5 - 0.5,
+            speedY: -Math.random() * 1.8 - 0.5,
             alpha: Math.random() * 0.8 + 0.2
         }));
 
@@ -90,16 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (introEnded) return;
             ctx.clearRect(0, 0, width, height);
 
-            // Red scanning laser lines
-            const scanY = (Date.now() * 0.15) % height;
-            ctx.strokeStyle = 'rgba(255, 0, 60, 0.25)';
+            const scanY = (Date.now() * 0.2) % height;
+            ctx.strokeStyle = 'rgba(255, 0, 60, 0.3)';
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(0, scanY);
             ctx.lineTo(width, scanY);
             ctx.stroke();
 
-            // Particles
             particles.forEach(p => {
                 p.y += p.speedY;
                 if (p.y < 0) p.y = height;
@@ -125,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         AudioEngine.playBeep(1200, 'triangle', 0.2);
     }
 
-    // Timed Intro Sequence (5-7s)
     setTimeout(() => {
         if (!introEnded) {
             stage1.style.opacity = '1';
@@ -159,53 +185,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4600);
 
     setTimeout(() => {
-        if (!introEnded) {
-            endIntro();
-        }
+        if (!introEnded) endIntro();
     }, 6200);
 
-    if (skipBtn) {
-        skipBtn.addEventListener('click', endIntro);
-    }
+    if (skipBtn) skipBtn.addEventListener('click', endIntro);
 
 
-    // ==================== 2. INTERACTIVE 3D THREE.JS AI CORE ====================
+    // ==================== 3. INTERACTIVE 3D THREE.JS QUANTUM CORE ====================
     const coreContainer = document.getElementById('ai-core-container');
     let coreMouseX = 0, coreMouseY = 0;
 
     if (coreContainer && typeof Three !== 'undefined') {
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-        camera.position.z = 7;
+        camera.position.z = 7.5;
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(400, 400);
+        renderer.setSize(420, 420);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         coreContainer.appendChild(renderer.domElement);
 
-        // Core Glowing Energy Orb
+        // Core Energy Orb
         const sphereGeo = new THREE.IcosahedronGeometry(1.6, 3);
         const sphereMat = new THREE.MeshBasicMaterial({
             color: 0xFF003C,
             wireframe: true,
             transparent: true,
-            opacity: 0.85
+            opacity: 0.9
         });
         const coreOrb = new THREE.Mesh(sphereGeo, sphereMat);
         scene.add(coreOrb);
 
-        // Inner Dense Crimson Core
-        const innerGeo = new THREE.SphereGeometry(1.0, 32, 32);
+        // Inner Core
+        const innerGeo = new THREE.SphereGeometry(1.1, 32, 32);
         const innerMat = new THREE.MeshBasicMaterial({
             color: 0xff1a4f,
             transparent: true,
-            opacity: 0.9
+            opacity: 0.95
         });
         const innerOrb = new THREE.Mesh(innerGeo, innerMat);
         scene.add(innerOrb);
 
-        // Holographic Concentric Rings
-        function createTechRing(radius, tube, color, opacity) {
+        // Concentric Rings
+        function createRing(radius, tube, color, opacity) {
             const ringGeo = new THREE.TorusGeometry(radius, tube, 16, 100);
             const ringMat = new THREE.MeshBasicMaterial({
                 color: color,
@@ -216,9 +238,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return new THREE.Mesh(ringGeo, ringMat);
         }
 
-        const ring1 = createTechRing(2.3, 0.02, 0xFF003C, 0.7);
-        const ring2 = createTechRing(2.7, 0.015, 0xE2E8F0, 0.5);
-        const ring3 = createTechRing(3.1, 0.02, 0xFF003C, 0.4);
+        const ring1 = createRing(2.3, 0.02, 0xFF003C, 0.8);
+        const ring2 = createRing(2.8, 0.015, 0xE2E8F0, 0.6);
+        const ring3 = createRing(3.3, 0.02, 0xFF003C, 0.4);
 
         ring1.rotation.x = Math.PI / 3;
         ring2.rotation.y = Math.PI / 4;
@@ -228,28 +250,27 @@ document.addEventListener('DOMContentLoaded', () => {
         scene.add(ring2);
         scene.add(ring3);
 
-        // 3D Particle Cloud
+        // Particle System
         const partGeo = new THREE.BufferGeometry();
-        const partCount = 180;
+        const partCount = 220;
         const posArray = new Float32Array(partCount * 3);
 
         for (let i = 0; i < partCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 8;
+            posArray[i] = (Math.random() - 0.5) * 9;
         }
 
         partGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
         const partMat = new THREE.PointsMaterial({
-            size: 0.03,
+            size: 0.035,
             color: 0xFF003C,
             transparent: true,
-            opacity: 0.8
+            opacity: 0.85
         });
         const particles3D = new THREE.Points(partGeo, partMat);
         scene.add(particles3D);
 
-        // Responsive Resizing for Core Canvas
         function resizeCore() {
-            const size = Math.min(coreContainer.clientWidth, 450);
+            const size = Math.min(coreContainer.clientWidth, 460);
             renderer.setSize(size, size);
             camera.aspect = 1;
             camera.updateProjectionMatrix();
@@ -257,33 +278,27 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', resizeCore);
         resizeCore();
 
-        // Core Mouse Parallax Track
         document.addEventListener('mousemove', (e) => {
-            coreMouseX = (e.clientX / window.innerWidth - 0.5) * 0.8;
-            coreMouseY = (e.clientY / window.innerHeight - 0.5) * 0.8;
+            coreMouseX = (e.clientX / window.innerWidth - 0.5) * 0.9;
+            coreMouseY = (e.clientY / window.innerHeight - 0.5) * 0.9;
         });
 
-        // Render Loop
         function animateCore() {
             requestAnimationFrame(animateCore);
-
             const time = Date.now() * 0.001;
 
-            // Orb Pulse & Rotation
-            coreOrb.rotation.x += 0.004;
-            coreOrb.rotation.y += 0.006;
-            
-            const scalePulse = 1 + Math.sin(time * 3) * 0.05;
+            coreOrb.rotation.x += 0.005;
+            coreOrb.rotation.y += 0.007;
+
+            const scalePulse = 1 + Math.sin(time * 3.5) * 0.06;
             innerOrb.scale.set(scalePulse, scalePulse, scalePulse);
 
-            // Ring Rotations
-            ring1.rotation.z += 0.01;
-            ring2.rotation.x += 0.008;
-            ring3.rotation.y += 0.012;
+            ring1.rotation.z += 0.012;
+            ring2.rotation.x += 0.009;
+            ring3.rotation.y += 0.014;
 
-            particles3D.rotation.y += 0.002;
+            particles3D.rotation.y += 0.0025;
 
-            // Parallax Inertia
             scene.rotation.y += (coreMouseX - scene.rotation.y) * 0.05;
             scene.rotation.x += (coreMouseY - scene.rotation.x) * 0.05;
 
@@ -293,74 +308,103 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // ==================== 3. BACKGROUND CANVAS PARTICLES & GRID ====================
-    const bgCanvas = document.getElementById('bg-canvas');
-    if (bgCanvas) {
-        const ctx = bgCanvas.getContext('2d');
-        let width = bgCanvas.width = window.innerWidth;
-        let height = bgCanvas.height = window.innerHeight;
+    // ==================== 4. NEURAL CONSTELLATION CANVAS ====================
+    const neuralCanvas = document.getElementById('neural-canvas');
+    if (neuralCanvas) {
+        const ctx = neuralCanvas.getContext('2d');
+        let width = neuralCanvas.width = window.innerWidth;
+        let height = neuralCanvas.height = window.innerHeight;
+        let mouseX = width / 2;
+        let mouseY = height / 2;
 
         window.addEventListener('resize', () => {
-            width = bgCanvas.width = window.innerWidth;
-            height = bgCanvas.height = window.innerHeight;
+            width = neuralCanvas.width = window.innerWidth;
+            height = neuralCanvas.height = window.innerHeight;
         });
 
-        const bgParticles = Array.from({ length: 60 }, () => ({
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        const nodes = Array.from({ length: 70 }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
-            radius: Math.random() * 1.5 + 0.5,
-            speedX: (Math.random() - 0.5) * 0.3,
-            speedY: (Math.random() - 0.5) * 0.3,
-            alpha: Math.random() * 0.5 + 0.1
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.8,
+            radius: Math.random() * 2 + 1
         }));
 
-        function drawBgCanvas() {
+        function drawNeural() {
             ctx.clearRect(0, 0, width, height);
 
-            bgParticles.forEach(p => {
-                p.x += p.speedX;
-                p.y += p.speedY;
+            nodes.forEach((node, i) => {
+                node.x += node.vx;
+                node.y += node.vy;
 
-                if (p.x < 0) p.x = width;
-                if (p.x > width) p.x = 0;
-                if (p.y < 0) p.y = height;
-                if (p.y > height) p.y = 0;
+                if (node.x < 0 || node.x > width) node.vx *= -1;
+                if (node.y < 0 || node.y > height) node.vy *= -1;
 
-                ctx.fillStyle = `rgba(255, 0, 60, ${p.alpha})`;
+                ctx.fillStyle = 'rgba(255, 0, 60, 0.6)';
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
                 ctx.fill();
+
+                // Mouse interaction connection
+                const dxMouse = mouseX - node.x;
+                const dyMouse = mouseY - node.y;
+                const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                if (distMouse < 140) {
+                    ctx.strokeStyle = `rgba(255, 0, 60, ${1 - distMouse / 140})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(node.x, node.y);
+                    ctx.lineTo(mouseX, mouseY);
+                    ctx.stroke();
+                }
+
+                // Node-to-node connections
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const other = nodes[j];
+                    const dx = other.x - node.x;
+                    const dy = other.y - node.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - dist / 100) * 0.15})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(node.x, node.y);
+                        ctx.lineTo(other.x, other.y);
+                        ctx.stroke();
+                    }
+                }
             });
 
-            requestAnimationFrame(drawBgCanvas);
+            requestAnimationFrame(drawNeural);
         }
-        drawBgCanvas();
+        drawNeural();
     }
 
 
-    // ==================== 4. CURSOR RED GLOW TRACKER ====================
+    // ==================== 5. CURSOR GLOW TRACKER ====================
     const cursorGlow = document.getElementById('cursor-glow');
     if (cursorGlow) {
         document.addEventListener('mousemove', (e) => {
-            cursorGlow.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(255, 0, 60, 0.12), transparent 80%)`;
+            cursorGlow.style.background = `radial-gradient(650px circle at ${e.clientX}px ${e.clientY}px, rgba(255, 0, 60, 0.14), transparent 80%)`;
         });
     }
 
 
-    // ==================== 5. 3D CARD PERSPECTIVE TILT EFFECT ====================
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    tiltCards.forEach(card => {
+    // ==================== 6. 3D CARD TILT EFFECT ====================
+    document.querySelectorAll('.tilt-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-
-            const rotateX = (centerY - y) / 15;
-            const rotateY = (x - centerX) / 15;
-
+            const rotateX = (centerY - y) / 14;
+            const rotateY = (x - centerX) / 14;
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
 
@@ -370,7 +414,109 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // ==================== 6. FLOATING HUD NAVBAR & SECTION OBSERVER ====================
+    // ==================== 7. INTERACTIVE AI PROMPT SYNTHESIZER LAB ====================
+    const synthDomain = document.getElementById('synth-domain');
+    const synthKeywords = document.getElementById('synth-keywords');
+    const synthStyleBtns = document.querySelectorAll('.synth-style-btn');
+    const synthOutputText = document.getElementById('synth-output-text');
+    const synthGenerateBtn = document.getElementById('synth-generate-btn');
+    const synthStatus = document.getElementById('synth-status');
+    const synthPosterPreview = document.getElementById('synth-poster-preview');
+
+    let activeStyle = 'Holographic Cyberpunk HUD';
+
+    synthStyleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            synthStyleBtns.forEach(b => b.classList.remove('border-crimson', 'bg-crimson/20', 'text-white'));
+            btn.classList.add('border-crimson', 'bg-crimson/20', 'text-white');
+            activeStyle = btn.getAttribute('data-style');
+            updateSynthPreview();
+        });
+    });
+
+    function updateSynthPreview() {
+        if (!synthOutputText || !synthDomain || !synthKeywords) return;
+        const dom = synthDomain.value.split(':')[1] || synthDomain.value;
+        const kw = synthKeywords.value || 'AI Prompt Synthesis';
+        synthOutputText.textContent = `GENERATE_POSTER(domain="${dom.trim()}", style="${activeStyle}", keywords="${kw.trim()}", resolution="8K");`;
+    }
+
+    if (synthDomain) synthDomain.addEventListener('change', updateSynthPreview);
+    if (synthKeywords) synthKeywords.addEventListener('input', updateSynthPreview);
+
+    if (synthGenerateBtn) {
+        synthGenerateBtn.addEventListener('click', () => {
+            AudioEngine.playGrantChime();
+            if (synthStatus) synthStatus.textContent = 'SYNTHESIZING...';
+            if (synthPosterPreview) {
+                synthPosterPreview.innerHTML = `
+                    <div class="w-10 h-10 border-2 border-crimson border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div class="font-orbitron font-bold text-xs text-crimson-glow">GENERATING HOLOGRAPHIC POSTER...</div>
+                `;
+            }
+
+            setTimeout(() => {
+                if (synthStatus) synthStatus.textContent = 'READY';
+                if (synthPosterPreview) {
+                    synthPosterPreview.innerHTML = `
+                        <i data-lucide="sparkles" class="w-10 h-10 text-crimson mx-auto animate-bounce"></i>
+                        <div class="font-orbitron font-bold text-sm text-white tracking-widest">PROMPT SYNTHESIZED SUCCESSFULLY</div>
+                        <span class="px-3 py-1 rounded-full bg-crimson/30 text-crimson-glow font-mono text-[10px] border border-crimson/50 font-bold">MATCH ACCURACY: 99.8%</span>
+                    `;
+                    lucide.createIcons();
+                }
+            }, 1200);
+        });
+    }
+
+
+    // ==================== 8. STOPWATCH & RAISE HAND SIMULATOR ====================
+    const timerDisplay = document.getElementById('round1-timer-display');
+    const timerToggleBtn = document.getElementById('timer-toggle-btn');
+    const raiseHandBtn = document.getElementById('raise-hand-demo-btn');
+
+    let timerInterval = null;
+    let timerSeconds = 300;
+    let timerRunning = false;
+
+    function formatTime(sec) {
+        const m = Math.floor(sec / 60).toString().padStart(2, '0');
+        const s = (sec % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    }
+
+    if (timerToggleBtn && timerDisplay) {
+        timerToggleBtn.addEventListener('click', () => {
+            if (timerRunning) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+                timerToggleBtn.textContent = 'START DEMO';
+            } else {
+                timerRunning = true;
+                timerToggleBtn.textContent = 'PAUSE DEMO';
+                timerInterval = setInterval(() => {
+                    if (timerSeconds > 0) {
+                        timerSeconds--;
+                        timerDisplay.textContent = formatTime(timerSeconds);
+                    } else {
+                        clearInterval(timerInterval);
+                        timerRunning = false;
+                        timerToggleBtn.textContent = 'RESET DEMO';
+                    }
+                }, 1000);
+            }
+        });
+    }
+
+    if (raiseHandBtn) {
+        raiseHandBtn.addEventListener('click', () => {
+            AudioEngine.playGrantChime();
+            alert('🖐️ GOOGLE MEET RAISE HAND SIMULATION:\n\nHand Raised Successfully!\nSpeed Point Claimed (1 Point Awarded).\nHost notified for Google Meet screen presentation.');
+        });
+    }
+
+
+    // ==================== 9. FLOATING HUD NAVBAR & OBSERVER ====================
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
     const indicator = document.getElementById('nav-indicator');
@@ -400,33 +546,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.35 });
 
     sections.forEach(sec => sectionObserver.observe(sec));
 
-    // Navbar Scroll Background Change
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.querySelector('.hud-glass').classList.add('bg-black/90', 'border-crimson/30');
+            navbar.querySelector('.hud-glass').classList.add('bg-black/95', 'border-crimson/40');
         } else {
-            navbar.querySelector('.hud-glass').classList.remove('bg-black/90', 'border-crimson/30');
+            navbar.querySelector('.hud-glass').classList.remove('bg-black/95', 'border-crimson/40');
         }
     });
 
-    // Mobile Menu Toggle
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileToggle && mobileMenu) {
-        mobileToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        mobileToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
             link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
         });
     }
 
 
-    // ==================== 7. REGISTRATION FORM VALIDATION & MODAL ====================
+    // ==================== 10. REGISTRATION FORM VALIDATION ====================
     const regForm = document.getElementById('registration-form');
     const ieeeYes = document.getElementById('ieee-yes');
     const ieeeNo = document.getElementById('ieee-no');
@@ -435,28 +577,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const successModal = document.getElementById('success-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
 
-    // IEEE Toggle Logic
     if (ieeeYes && ieeeNo && ieeeInterestInput) {
         ieeeYes.addEventListener('click', () => {
             ieeeInterestInput.value = 'YES';
             ieeeYes.classList.add('bg-crimson', 'text-white', 'border-crimson', 'shadow-[0_0_15px_#FF003C]');
             ieeeNo.classList.remove('bg-crimson', 'text-white', 'border-crimson', 'shadow-[0_0_15px_#FF003C]');
-            ieeeError.classList.add('hidden');
+            if (ieeeError) ieeeError.classList.add('hidden');
         });
 
         ieeeNo.addEventListener('click', () => {
             ieeeInterestInput.value = 'NO';
             ieeeNo.classList.add('bg-crimson', 'text-white', 'border-crimson', 'shadow-[0_0_15px_#FF003C]');
             ieeeYes.classList.remove('bg-crimson', 'text-white', 'border-crimson', 'shadow-[0_0_15px_#FF003C]');
-            ieeeError.classList.add('hidden');
+            if (ieeeError) ieeeError.classList.add('hidden');
         });
     }
 
-    // Live Field Validation
     function validateField(input) {
         const parent = input.closest('.space-y-2');
         if (!parent) return true;
-        
         const errorMsg = parent.querySelector('.error-msg');
         const validIcon = parent.querySelector('.valid-icon');
         let isValid = true;
@@ -487,18 +626,16 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('blur', () => validateField(input));
     });
 
-    // Form Submission Handler
     if (regForm) {
         regForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
             let allValid = true;
             document.querySelectorAll('.hud-input').forEach(input => {
                 if (!validateField(input)) allValid = false;
             });
 
             if (!ieeeInterestInput.value) {
-                ieeeError.classList.remove('hidden');
+                if (ieeeError) ieeeError.classList.remove('hidden');
                 allValid = false;
             }
 
@@ -522,7 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // ==================== 8. SCROLL-TRIGGERED WORD REVEAL ====================
+    // ==================== 11. SCROLL-TRIGGERED QUOTE ====================
     const quoteWords = document.querySelectorAll('.quote-word');
     if (quoteWords.length > 0) {
         window.addEventListener('scroll', () => {
@@ -532,7 +669,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (wordTop < triggerBottom) {
                     setTimeout(() => {
                         word.classList.remove('opacity-30');
-                        word.classList.add('opacity-100', 'drop-shadow-[0_0_15px_#FF003C]');
+                        word.classList.add('opacity-100', 'drop-shadow-[0_0_20px_#FF003C]');
                     }, idx * 300);
                 }
             });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOMAIN EXPANSION // AI Prompt Challenge - Jeppiaar Engineering College IEEE SB</title>
+    <title>DOMAIN EXPANSION // Quantum AI Command Center - Jeppiaar Engineering College IEEE SB</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,18 +18,19 @@
             theme: {
                 extend: {
                     colors: {
-                        obsidian: '#050508',
-                        'obsidian-card': 'rgba(12, 13, 18, 0.75)',
+                        obsidian: '#030305',
+                        'obsidian-card': 'rgba(10, 11, 16, 0.85)',
                         crimson: {
                             DEFAULT: '#FF003C',
                             glow: '#ff1a4f',
-                            dark: '#990024',
-                            deep: '#4a0012'
+                            neon: '#ff0055',
+                            dark: '#80001e',
+                            deep: '#3d000f'
                         },
-                        silver: {
-                            light: '#E2E8F0',
-                            DEFAULT: '#94A3B8',
-                            dark: '#475569'
+                        cyber: {
+                            silver: '#94A3B8',
+                            cyan: '#00F0FF',
+                            gold: '#FFD700'
                         }
                     },
                     fontFamily: {
@@ -53,51 +54,69 @@
 <body class="bg-obsidian text-slate-100 font-rajdhani overflow-x-hidden selection:bg-crimson selection:text-white">
 
     <!-- Interactive Cursor Glow Canvas -->
-    <div id="cursor-glow" class="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300 opacity-60"></div>
+    <div id="cursor-glow" class="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300 opacity-70"></div>
     
-    <!-- Cyber Background Canvas -->
-    <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
-    <div class="hud-grid-overlay fixed inset-0 pointer-events-none z-0"></div>
+    <!-- Interactive Neural Constellation Canvas -->
+    <canvas id="neural-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+    <div class="cyber-laser-grid fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- ==================== TOP TELEMETRY BAR ==================== -->
+    <div class="fixed top-0 left-0 right-0 z-50 bg-black/90 border-b border-white/10 px-4 py-1 text-[10px] font-mono text-slate-400 flex items-center justify-between pointer-events-none">
+        <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1 text-crimson font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping"></span>
+                SYSTEM: ONLINE
+            </span>
+            <span class="hidden sm:inline">LATENCY: <span id="telemetry-ping" class="text-slate-200">12ms</span></span>
+            <span class="hidden md:inline">NEURAL MESH: <span class="text-emerald-400">STABLE</span></span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span>IEEE SB JEPPIAAR EC</span>
+            <span class="text-crimson">•</span>
+            <span>WIE AFFINITY GROUP</span>
+        </div>
+    </div>
+
 
     <!-- ==================== 1. CINEMATIC INTRO ==================== -->
     <div id="cinematic-intro" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center overflow-hidden transition-opacity duration-1000">
-        <!-- Canvas for Intro Particle Rain & Laser Grid -->
+        <!-- Intro Canvas -->
         <canvas id="intro-canvas" class="absolute inset-0 pointer-events-none"></canvas>
         
-        <!-- Rotating Holographic HUD Circles -->
-        <div class="absolute w-[500px] h-[500px] rounded-full border border-crimson/20 animate-spin-slow pointer-events-none"></div>
-        <div class="absolute w-[700px] h-[700px] rounded-full border border-dashed border-crimson/10 animate-reverse-spin pointer-events-none"></div>
-        <div class="absolute w-[300px] h-[300px] rounded-full border-2 border-crimson/40 animate-ping-slow pointer-events-none"></div>
+        <!-- Rotating Quantum Holographic Geometry -->
+        <div class="absolute w-[500px] h-[500px] rounded-full border border-crimson/30 animate-spin-slow pointer-events-none"></div>
+        <div class="absolute w-[750px] h-[750px] rounded-full border border-dashed border-crimson/20 animate-reverse-spin pointer-events-none"></div>
+        <div class="absolute w-[350px] h-[350px] rounded-full border-2 border-crimson/50 animate-ping-slow pointer-events-none"></div>
 
         <!-- Intro Content Container -->
         <div class="relative z-10 text-center max-w-4xl px-6 flex flex-col items-center space-y-6">
-            <!-- Stage 1: College Name -->
+            <!-- Stage 1 -->
             <div id="intro-stage-1" class="opacity-0 transition-all duration-700 transform translate-y-4">
-                <p class="font-mono text-crimson text-sm tracking-[0.4em] uppercase mb-2">// INITIALIZING SYSTEM PROTOCOL</p>
+                <p class="font-mono text-crimson text-sm tracking-[0.4em] uppercase mb-2">// INITIALIZING QUANTUM NEURAL ENGINE</p>
                 <h2 class="font-orbitron font-bold text-2xl md:text-4xl text-slate-100 tracking-wider">
                     JEPPIAAR ENGINEERING COLLEGE
                 </h2>
             </div>
 
-            <!-- Stage 2: IEEE SB & WIE -->
+            <!-- Stage 2 -->
             <div id="intro-stage-2" class="opacity-0 transition-all duration-700 transform translate-y-4">
-                <div class="inline-flex items-center gap-3 py-1 px-4 rounded-full border border-crimson/30 bg-crimson/10 text-slate-300 font-mono text-xs tracking-widest uppercase">
+                <div class="inline-flex items-center gap-3 py-1.5 px-6 rounded-full border border-crimson/40 bg-crimson/10 text-slate-200 font-mono text-xs tracking-widest uppercase shadow-[0_0_20px_rgba(255,0,60,0.3)]">
                     <span>IEEE STUDENT BRANCH</span>
                     <span class="text-crimson">•</span>
                     <span>WOMEN IN ENGINEERING (WIE)</span>
                 </div>
             </div>
 
-            <!-- Stage 3: Title Reveal -->
+            <!-- Stage 3 -->
             <div id="intro-stage-3" class="opacity-0 transition-all duration-1000 transform scale-95">
-                <h1 class="font-orbitron font-black text-5xl md:text-8xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-white to-crimson drop-shadow-[0_0_35px_rgba(255,0,60,0.8)]">
-                    DOMAIN<br><span class="text-crimson">EXPANSION</span>
+                <h1 class="font-orbitron font-black text-6xl md:text-9xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-white to-crimson drop-shadow-[0_0_45px_rgba(255,0,60,0.9)]">
+                    DOMAIN<br><span class="text-crimson text-shadow-neon">EXPANSION</span>
                 </h1>
             </div>
 
-            <!-- Stage 4: Event Subtitle -->
+            <!-- Stage 4 -->
             <div id="intro-stage-4" class="opacity-0 transition-all duration-700 transform translate-y-4 space-y-2">
-                <div class="font-orbitron font-bold text-xl md:text-2xl text-slate-200 tracking-widest">
+                <div class="font-orbitron font-bold text-xl md:text-3xl text-slate-200 tracking-widest">
                     AI PROMPT CHALLENGE
                 </div>
                 <p class="font-mono text-crimson-glow text-sm md:text-base tracking-[0.3em] uppercase">
@@ -107,7 +126,7 @@
         </div>
 
         <!-- Skip Intro Button -->
-        <button id="skip-intro-btn" class="absolute bottom-10 right-10 z-20 group flex items-center gap-3 px-6 py-2.5 rounded-full border border-crimson/40 bg-black/60 backdrop-blur-md text-xs font-mono tracking-widest text-slate-300 hover:text-white hover:border-crimson hover:shadow-[0_0_20px_rgba(255,0,60,0.5)] transition-all">
+        <button id="skip-intro-btn" class="absolute bottom-10 right-10 z-20 group flex items-center gap-3 px-6 py-2.5 rounded-full border border-crimson/50 bg-black/80 backdrop-blur-md text-xs font-mono tracking-widest text-slate-200 hover:text-white hover:border-crimson hover:shadow-[0_0_25px_rgba(255,0,60,0.6)] transition-all">
             <span>SKIP INTRO</span>
             <i data-lucide="fast-forward" class="w-4 h-4 text-crimson group-hover:translate-x-1 transition-transform"></i>
         </button>
@@ -115,25 +134,21 @@
 
 
     <!-- ==================== 2. FLOATING HUD NAVBAR ==================== -->
-    <nav id="navbar" class="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-40 transition-all duration-300">
-        <div class="hud-glass px-6 py-3 rounded-2xl border border-white/10 flex items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+    <nav id="navbar" class="fixed top-8 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-40 transition-all duration-300">
+        <div class="hud-glass px-6 py-3 rounded-2xl border border-white/15 flex items-center justify-between shadow-[0_10px_40px_rgba(0,0,0,0.9)]">
             
             <!-- Left: Logos -->
             <a href="#home" class="flex items-center gap-4 group">
                 <!-- Jeppiaar Logo Vector -->
-                <div class="w-10 h-10 relative flex items-center justify-center bg-black/40 rounded-xl border border-white/10 p-1 group-hover:border-crimson/50 transition-colors">
+                <div class="w-10 h-10 relative flex items-center justify-center bg-black/60 rounded-xl border border-white/20 p-1 group-hover:border-crimson transition-all shadow-[0_0_15px_rgba(255,0,60,0.2)]">
                     <svg viewBox="0 0 100 100" class="w-full h-full text-slate-100 fill-current">
-                        <!-- Outer Shield -->
                         <path d="M50 5 L90 20 L90 60 C90 80 50 95 50 95 C50 95 10 80 10 60 L10 20 Z" fill="none" stroke="currentColor" stroke-width="6"/>
-                        <path d="M50 12 L82 24 L82 58 C82 74 50 86 50 86 C50 86 18 74 18 58 L18 24 Z" fill="#FF003C" opacity="0.15"/>
-                        <!-- Torch / Flame -->
+                        <path d="M50 12 L82 24 L82 58 C82 74 50 86 50 86 C50 86 18 74 18 58 L18 24 Z" fill="#FF003C" opacity="0.2"/>
                         <path d="M50 30 L54 42 L65 45 L56 52 L59 63 L50 56 L41 63 L44 52 L35 45 L46 42 Z" fill="#FF003C"/>
-                        <!-- Book lines -->
                         <path d="M30 70 Q 50 65 70 70 M30 75 Q 50 70 70 75" stroke="currentColor" stroke-width="4" fill="none"/>
                     </svg>
                 </div>
 
-                <!-- Divider -->
                 <span class="h-6 w-px bg-white/20"></span>
 
                 <!-- IEEE & WIE Logo Vector -->
@@ -152,15 +167,18 @@
                 <a href="#home" class="nav-link text-slate-300 hover:text-white transition-colors py-1" data-section="home">HOME</a>
                 <a href="#about" class="nav-link text-slate-300 hover:text-white transition-colors py-1" data-section="about">EVENT</a>
                 <a href="#domains" class="nav-link text-slate-300 hover:text-white transition-colors py-1" data-section="domains">DOMAINS</a>
+                <a href="#synthesizer" class="nav-link text-slate-300 hover:text-white transition-colors py-1" data-section="synthesizer">AI LAB</a>
                 <a href="#rounds" class="nav-link text-slate-300 hover:text-white transition-colors py-1" data-section="rounds">ROUNDS</a>
                 <a href="#register" class="nav-link text-slate-300 hover:text-white transition-colors py-1" data-section="register">REGISTER</a>
                 
-                <!-- Glowing Crimson Active Indicator -->
                 <div id="nav-indicator" class="absolute bottom-0 h-0.5 bg-crimson shadow-[0_0_10px_#FF003C] transition-all duration-300 rounded-full"></div>
             </div>
 
-            <!-- CTA Button Right -->
+            <!-- Right Controls: Audio Toggle & CTA -->
             <div class="hidden lg:flex items-center gap-4">
+                <button id="audio-toggle-btn" class="p-2.5 rounded-xl border border-white/15 bg-black/60 text-slate-300 hover:text-crimson hover:border-crimson transition-all" title="Toggle HUD Sound FX">
+                    <i data-lucide="volume-2" id="audio-icon" class="w-4 h-4"></i>
+                </button>
                 <a href="#register" class="hud-button-sm flex items-center gap-2">
                     <span>ENTER PORTAL</span>
                     <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
@@ -174,10 +192,11 @@
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden mt-2 hud-glass rounded-2xl p-6 border border-white/10 flex flex-col gap-4 font-orbitron text-sm font-semibold tracking-widest">
+        <div id="mobile-menu" class="hidden md:hidden mt-2 hud-glass rounded-2xl p-6 border border-white/15 flex flex-col gap-4 font-orbitron text-sm font-semibold tracking-widest">
             <a href="#home" class="mobile-nav-link text-slate-300 hover:text-crimson">HOME</a>
             <a href="#about" class="mobile-nav-link text-slate-300 hover:text-crimson">EVENT</a>
             <a href="#domains" class="mobile-nav-link text-slate-300 hover:text-crimson">DOMAINS</a>
+            <a href="#synthesizer" class="mobile-nav-link text-slate-300 hover:text-crimson">AI LAB</a>
             <a href="#rounds" class="mobile-nav-link text-slate-300 hover:text-crimson">ROUNDS</a>
             <a href="#register" class="mobile-nav-link text-slate-300 hover:text-crimson">REGISTER</a>
         </div>
@@ -185,24 +204,22 @@
 
 
     <!-- ==================== 3. HERO SECTION ==================== -->
-    <section id="home" class="min-h-screen relative pt-32 pb-20 flex items-center justify-center overflow-hidden">
+    <section id="home" class="min-h-screen relative pt-36 pb-20 flex items-center justify-center overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             
-            <!-- Hero Left Side (HUD Title & Info) -->
+            <!-- Hero Left Side -->
             <div class="lg:col-span-7 space-y-8 text-left">
                 
-                <!-- Online Badge -->
-                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-crimson/40 bg-crimson/10 text-crimson font-mono text-xs tracking-widest uppercase backdrop-blur-md">
+                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-crimson/50 bg-crimson/10 text-crimson font-mono text-xs tracking-widest uppercase backdrop-blur-md shadow-[0_0_20px_rgba(255,0,60,0.3)]">
                     <span class="w-2 h-2 rounded-full bg-crimson animate-ping"></span>
                     <span>ONLINE AI CHALLENGE // 2026</span>
                 </div>
 
-                <!-- Main Futuristic Title Composition -->
                 <div class="space-y-2">
-                    <div class="font-mono text-slate-400 text-xs tracking-[0.3em] uppercase">// SYSTEM TITLE REVEAL</div>
+                    <div class="font-mono text-slate-400 text-xs tracking-[0.3em] uppercase">// SYSTEM PROTOCOL REVEAL</div>
                     <h1 class="font-orbitron font-black text-6xl sm:text-7xl lg:text-8xl tracking-tight leading-none text-slate-100">
                         DOMAIN<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-crimson via-crimson-glow to-white drop-shadow-[0_0_30px_rgba(255,0,60,0.6)]">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-crimson via-crimson-glow to-white drop-shadow-[0_0_40px_rgba(255,0,60,0.8)]">
                             EXPANSION
                         </span>
                     </h1>
@@ -211,29 +228,27 @@
                     </div>
                 </div>
 
-                <!-- Tagline -->
-                <div class="p-4 rounded-xl border-l-2 border-crimson bg-white/[0.02] backdrop-blur-sm">
+                <div class="p-4 rounded-xl border-l-2 border-crimson bg-white/[0.03] backdrop-blur-md">
                     <p class="font-mono text-crimson-glow text-base sm:text-lg font-medium tracking-wide uppercase">
                         EXPAND YOUR KNOWLEDGE. CHALLENGE YOUR MIND.
                     </p>
                 </div>
 
-                <!-- Description -->
                 <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
                     An online AI Prompt Challenge designed to test creativity, speed, domain understanding, and the ability to construct effective AI prompts under timed conditions.
                 </p>
 
                 <!-- Event Details HUD Cards -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-                    <div class="hud-card p-4 rounded-xl border border-white/10 bg-black/40">
+                    <div class="hud-card p-4 rounded-xl border border-white/15 bg-black/60">
                         <div class="text-xs font-mono text-slate-400">EVENT DATE</div>
                         <div class="font-orbitron font-bold text-base text-slate-100">27 SEPT 2026</div>
                     </div>
-                    <div class="hud-card p-4 rounded-xl border border-white/10 bg-black/40">
+                    <div class="hud-card p-4 rounded-xl border border-white/15 bg-black/60">
                         <div class="text-xs font-mono text-slate-400">EVENT MODE</div>
                         <div class="font-orbitron font-bold text-base text-crimson">ONLINE EVENT</div>
                     </div>
-                    <div class="hud-card p-4 rounded-xl border border-white/10 bg-black/40 col-span-2 sm:col-span-1">
+                    <div class="hud-card p-4 rounded-xl border border-white/15 bg-black/60 col-span-2 sm:col-span-1">
                         <div class="text-xs font-mono text-slate-400">PLATFORM</div>
                         <div class="font-orbitron font-bold text-base text-slate-100">GOOGLE MEET</div>
                     </div>
@@ -245,31 +260,28 @@
                         <span>REGISTER NOW</span>
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
-                    <a href="#about" class="hud-button-secondary flex items-center gap-3">
-                        <span>EXPLORE CHALLENGE</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-crimson"></i>
+                    <a href="#synthesizer" class="hud-button-secondary flex items-center gap-3">
+                        <span>LAUNCH AI LAB</span>
+                        <i data-lucide="sparkles" class="w-4 h-4 text-crimson"></i>
                     </a>
                 </div>
 
             </div>
 
-            <!-- Hero Right Side (Interactive 3D WebGL AI Core) -->
+            <!-- Hero Right Side (Interactive 3D Quantum AI Core) -->
             <div class="lg:col-span-5 relative flex items-center justify-center">
-                <!-- 3D Three.js WebGL Container -->
-                <div class="relative w-[340px] h-[340px] sm:w-[450px] sm:h-[450px] flex items-center justify-center">
+                <div class="relative w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] flex items-center justify-center">
                     
-                    <!-- WebGL Canvas for Rotating Spheres & Rings -->
                     <div id="ai-core-container" class="absolute inset-0 w-full h-full"></div>
                     
-                    <!-- HUD Status Tag Circle -->
                     <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
-                        <div class="w-[110%] h-[110%] rounded-full border border-dashed border-crimson/20 animate-spin-slow"></div>
+                        <div class="w-[110%] h-[110%] rounded-full border border-dashed border-crimson/30 animate-spin-slow"></div>
+                        <div class="w-[125%] h-[125%] rounded-full border border-crimson/10 animate-reverse-spin"></div>
                     </div>
                     
-                    <!-- Holographic Core Status Badge -->
-                    <div class="absolute -bottom-4 px-4 py-1.5 rounded-full border border-crimson/50 bg-black/80 backdrop-blur-md flex items-center gap-2 font-mono text-xs text-slate-200 tracking-widest shadow-[0_0_20px_rgba(255,0,60,0.4)]">
-                        <span class="w-2 h-2 rounded-full bg-crimson animate-ping"></span>
-                        <span>AI CORE // ACTIVE</span>
+                    <div class="absolute -bottom-4 px-5 py-2 rounded-full border border-crimson/60 bg-black/90 backdrop-blur-md flex items-center gap-2.5 font-mono text-xs text-slate-100 tracking-widest shadow-[0_0_25px_rgba(255,0,60,0.5)]">
+                        <span class="w-2.5 h-2.5 rounded-full bg-crimson animate-ping"></span>
+                        <span>QUANTUM CORE // ACTIVE</span>
                     </div>
 
                 </div>
@@ -281,7 +293,7 @@
 
     <!-- ==================== 4. EVENT STATUS PANEL ==================== -->
     <section class="relative z-20 -mt-8 max-w-7xl mx-auto px-6">
-        <div class="hud-panel p-6 rounded-2xl border border-white/15 bg-black/80 backdrop-blur-xl shadow-[0_0_50px_rgba(0,0,0,0.9)] grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+        <div class="hud-panel p-6 rounded-2xl border border-white/20 bg-black/90 backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.95)] grid grid-cols-2 md:grid-cols-5 gap-6 text-center relative overflow-hidden">
             
             <div class="space-y-1 border-r border-white/10 last:border-0 pr-4">
                 <div class="font-mono text-xs text-slate-400 tracking-wider">EVENT STATUS</div>
@@ -318,7 +330,6 @@
     <!-- ==================== 5. ABOUT SECTION ==================== -->
     <section id="about" class="py-32 relative overflow-hidden">
         
-        <!-- Floating Animated Background Words -->
         <div class="absolute inset-0 pointer-events-none opacity-10 select-none overflow-hidden font-orbitron font-black text-6xl sm:text-8xl tracking-widest text-slate-100">
             <div class="floating-word absolute top-10 left-10">CREATIVITY</div>
             <div class="floating-word absolute top-40 right-20 text-crimson">SPEED</div>
@@ -331,13 +342,12 @@
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
-                <!-- Left: Big Number 01 & Glowing Line -->
                 <div class="lg:col-span-5 flex items-center gap-8">
                     <div class="relative">
-                        <span class="font-orbitron font-black text-9xl sm:text-[14rem] leading-none text-transparent bg-clip-text bg-gradient-to-b from-slate-200 via-slate-500 to-transparent opacity-40">
+                        <span class="font-orbitron font-black text-9xl sm:text-[14rem] leading-none text-transparent bg-clip-text bg-gradient-to-b from-slate-200 via-slate-600 to-transparent opacity-40">
                             01
                         </span>
-                        <div class="absolute inset-y-0 right-0 w-1.5 bg-gradient-to-b from-transparent via-crimson to-transparent shadow-[0_0_15px_#FF003C] animate-pulse"></div>
+                        <div class="absolute inset-y-0 right-0 w-1.5 bg-gradient-to-b from-transparent via-crimson to-transparent shadow-[0_0_20px_#FF003C] animate-pulse"></div>
                     </div>
                     <div class="space-y-2">
                         <p class="font-mono text-xs text-crimson tracking-[0.3em] uppercase">// SYSTEM OVERVIEW</p>
@@ -347,9 +357,8 @@
                     </div>
                 </div>
 
-                <!-- Right: Detailed Description -->
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="hud-card p-8 rounded-2xl border border-white/10 bg-obsidian-card backdrop-blur-xl relative">
+                    <div class="hud-card p-8 rounded-2xl border border-white/15 bg-obsidian-card backdrop-blur-2xl relative">
                         <div class="hud-corner top-left"></div>
                         <div class="hud-corner bottom-right"></div>
                         
@@ -382,7 +391,6 @@
     <section id="domains" class="py-24 relative z-10">
         <div class="max-w-7xl mx-auto px-6 space-y-16">
             
-            <!-- Section Header -->
             <div class="text-center space-y-4 max-w-3xl mx-auto">
                 <div class="inline-flex items-center gap-2 font-mono text-xs text-crimson tracking-[0.3em] uppercase">
                     <i data-lucide="layers" class="w-4 h-4"></i>
@@ -396,11 +404,10 @@
                 </p>
             </div>
 
-            <!-- 3 Holographic 3D Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
                 <!-- CARD 1 -->
-                <div class="tilt-card hud-card p-8 rounded-2xl border border-white/10 bg-obsidian-card backdrop-blur-xl relative flex flex-col justify-between group hover:border-crimson/50 transition-all duration-500">
+                <div class="tilt-card hud-card p-8 rounded-2xl border border-white/15 bg-obsidian-card backdrop-blur-xl relative flex flex-col justify-between group hover:border-crimson/60 transition-all duration-500">
                     <div class="space-y-6">
                         <div class="flex items-center justify-between">
                             <span class="font-mono text-xs text-crimson tracking-widest">// DOMAIN 01</span>
@@ -432,7 +439,7 @@
                 </div>
 
                 <!-- CARD 2 -->
-                <div class="tilt-card hud-card p-8 rounded-2xl border border-white/10 bg-obsidian-card backdrop-blur-xl relative flex flex-col justify-between group hover:border-crimson/50 transition-all duration-500">
+                <div class="tilt-card hud-card p-8 rounded-2xl border border-white/15 bg-obsidian-card backdrop-blur-xl relative flex flex-col justify-between group hover:border-crimson/60 transition-all duration-500">
                     <div class="space-y-6">
                         <div class="flex items-center justify-between">
                             <span class="font-mono text-xs text-crimson tracking-widest">// DOMAIN 02</span>
@@ -464,16 +471,15 @@
                 </div>
 
                 <!-- CARD 3 (VISUALLY DOMINANT CARD) -->
-                <div class="tilt-card hud-card p-8 rounded-2xl border-2 border-crimson/60 bg-gradient-to-b from-crimson/20 via-obsidian-card to-obsidian-card backdrop-blur-xl relative flex flex-col justify-between group shadow-[0_0_30px_rgba(255,0,60,0.3)] hover:shadow-[0_0_50px_rgba(255,0,60,0.6)] transition-all duration-500">
-                    <!-- Dominant Badge -->
-                    <div class="absolute -top-3 right-6 px-3 py-1 rounded-full bg-crimson text-white font-mono text-[10px] font-bold tracking-widest">
+                <div class="tilt-card hud-card p-8 rounded-2xl border-2 border-crimson bg-gradient-to-b from-crimson/30 via-obsidian-card to-obsidian-card backdrop-blur-2xl relative flex flex-col justify-between group shadow-[0_0_35px_rgba(255,0,60,0.4)] hover:shadow-[0_0_60px_rgba(255,0,60,0.7)] transition-all duration-500">
+                    <div class="absolute -top-3 right-6 px-3 py-1 rounded-full bg-crimson text-white font-mono text-[10px] font-bold tracking-widest shadow-[0_0_10px_#FF003C]">
                         DOMINANT DOMAIN
                     </div>
 
                     <div class="space-y-6">
                         <div class="flex items-center justify-between">
                             <span class="font-mono text-xs text-crimson-glow tracking-widest">// DOMAIN 03</span>
-                            <div class="w-10 h-10 rounded-xl bg-crimson border border-crimson shadow-[0_0_15px_#FF003C] flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                            <div class="w-10 h-10 rounded-xl bg-crimson border border-crimson shadow-[0_0_20px_#FF003C] flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                                 <i data-lucide="cpu" class="w-5 h-5"></i>
                             </div>
                         </div>
@@ -483,19 +489,97 @@
                                 TECHNOLOGY &<br>ARTIFICIAL INTELLIGENCE
                             </h3>
                             <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="px-2.5 py-1 rounded bg-crimson/20 border border-crimson/40 text-[11px] font-mono text-white font-bold">TECHNOLOGY</span>
-                                <span class="px-2.5 py-1 rounded bg-crimson/20 border border-crimson/40 text-[11px] font-mono text-white font-bold">AI & FUTURE TECH</span>
+                                <span class="px-2.5 py-1 rounded bg-crimson/30 border border-crimson/50 text-[11px] font-mono text-white font-bold">TECHNOLOGY</span>
+                                <span class="px-2.5 py-1 rounded bg-crimson/30 border border-crimson/50 text-[11px] font-mono text-white font-bold">AI & FUTURE TECH</span>
                             </div>
                         </div>
 
-                        <p class="text-slate-300 text-sm leading-relaxed">
+                        <p class="text-slate-200 text-sm leading-relaxed">
                             Focus: Creative AI image generation based on advanced technology, futuristic paradigms, emerging tech, and Artificial Intelligence concepts.
                         </p>
                     </div>
 
-                    <div class="pt-6 border-t border-crimson/30 mt-8 flex items-center justify-between text-xs font-mono text-slate-300">
-                        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-crimson animate-ping"></span> HIGH PRIORITY</span>
+                    <div class="pt-6 border-t border-crimson/40 mt-8 flex items-center justify-between text-xs font-mono text-slate-200">
+                        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-crimson animate-ping"></span> HIGH PRIORITY</span>
                         <span class="text-crimson-glow font-bold">ROUND 01 ASSIGNMENT</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==================== NEW FEATURE: LIVE AI PROMPT SYNTHESIZER LAB ==================== -->
+    <section id="synthesizer" class="py-24 bg-black/60 border-y border-white/10 relative">
+        <div class="max-w-6xl mx-auto px-6 space-y-12">
+            
+            <div class="text-center space-y-3">
+                <div class="inline-flex items-center gap-2 font-mono text-xs text-crimson tracking-[0.3em] uppercase">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>INTERACTIVE PROMPT EXPERIMENT</span>
+                </div>
+                <h2 class="font-orbitron font-black text-4xl sm:text-5xl text-slate-100 tracking-wider">
+                    AI PROMPT <span class="text-crimson">SYNTHESIZER LAB</span>
+                </h2>
+                <p class="text-slate-400 text-sm max-w-xl mx-auto">
+                    Try out how prompt parameters transform into holographic visual outputs in real-time.
+                </p>
+            </div>
+
+            <div class="hud-panel p-8 rounded-3xl border border-white/20 bg-obsidian-card backdrop-blur-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Controls Left -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="space-y-2">
+                        <label class="block font-mono text-xs text-slate-300 uppercase tracking-widest">1. SELECT TARGET DOMAIN</label>
+                        <select id="synth-domain" class="hud-input w-full p-3.5 rounded-xl bg-black/80 border border-white/20 text-slate-100 font-rajdhani text-base focus:border-crimson focus:outline-none">
+                            <option value="DOMAIN 03: ARTIFICIAL INTELLIGENCE & FUTURE TECH">DOMAIN 03: ARTIFICIAL INTELLIGENCE & FUTURE TECH</option>
+                            <option value="DOMAIN 01: GENERAL KNOWLEDGE, MOVIES & MUSIC">DOMAIN 01: GENERAL KNOWLEDGE, MOVIES & MUSIC</option>
+                            <option value="DOMAIN 02: CYBER SECURITY, HISTORY & SPORTS">DOMAIN 02: CYBER SECURITY, HISTORY & SPORTS</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block font-mono text-xs text-slate-300 uppercase tracking-widest">2. PROMPT STYLE MODIFIER</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button type="button" class="synth-style-btn p-2.5 rounded-lg border border-white/15 bg-black/60 font-mono text-xs text-slate-300 hover:border-crimson active" data-style="Holographic Cyberpunk HUD">CYBERPUNK</button>
+                            <button type="button" class="synth-style-btn p-2.5 rounded-lg border border-white/15 bg-black/60 font-mono text-xs text-slate-300 hover:border-crimson" data-style="Photorealistic 8K Cinematic">PHOTOREAL</button>
+                            <button type="button" class="synth-style-btn p-2.5 rounded-lg border border-white/15 bg-black/60 font-mono text-xs text-slate-300 hover:border-crimson" data-style="Futuristic Neon Line Art">NEON LINE</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block font-mono text-xs text-slate-300 uppercase tracking-widest">3. SUBJECT / KEYWORDS</label>
+                        <input type="text" id="synth-keywords" value="Quantum Neural Core, Holographic Data Stream, Crimson Energy Pulse" class="hud-input w-full p-3.5 rounded-xl bg-black/80 border border-white/20 text-slate-100 font-mono text-sm focus:border-crimson focus:outline-none">
+                    </div>
+
+                    <button id="synth-generate-btn" class="hud-button w-full py-4 flex items-center justify-center gap-3">
+                        <span>SYNTHESIZE PROMPT</span>
+                        <i data-lucide="play" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Display Right -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="p-4 rounded-xl border border-crimson/40 bg-black/90 font-mono text-xs text-slate-200 space-y-2 min-h-[140px]">
+                        <div class="flex items-center justify-between text-[10px] text-slate-500 border-b border-white/10 pb-1">
+                            <span>PROMPT STRING SYNTHESIS</span>
+                            <span id="synth-status" class="text-crimson font-bold">READY</span>
+                        </div>
+                        <div id="synth-output-text" class="text-crimson-glow font-bold leading-relaxed">
+                            GENERATE_POSTER(domain="AI & FUTURE TECH", style="Holographic Cyberpunk HUD", keywords="Quantum Neural Core, Holographic Data Stream, Crimson Energy Pulse", resolution="8K");
+                        </div>
+                    </div>
+
+                    <!-- Holographic Render Simulation Frame -->
+                    <div class="relative h-48 rounded-xl border-2 border-crimson/50 bg-gradient-to-tr from-crimson/20 via-black to-black flex flex-col items-center justify-center overflow-hidden shadow-[0_0_30px_rgba(255,0,60,0.3)]">
+                        <div class="absolute inset-0 bg-scanline pointer-events-none opacity-40"></div>
+                        <div id="synth-poster-preview" class="text-center space-y-2 p-6 z-10">
+                            <i data-lucide="cpu" class="w-12 h-12 text-crimson mx-auto animate-pulse"></i>
+                            <div class="font-orbitron font-bold text-sm text-white tracking-widest">SYNTHESIZED AI POSTER PREVIEW</div>
+                            <span class="px-3 py-1 rounded-full bg-crimson/30 text-crimson-glow font-mono text-[10px] border border-crimson/40">ACCURACY: 99.4%</span>
+                        </div>
                     </div>
                 </div>
 
@@ -510,7 +594,6 @@
             THREE DOMAINS. ONE CHALLENGE.
         </div>
         
-        <!-- Infinite Scrolling Ticker -->
         <div class="marquee-wrapper overflow-hidden flex whitespace-nowrap select-none">
             <div class="marquee-content flex gap-8 font-orbitron font-black text-2xl md:text-3xl text-slate-200 uppercase tracking-widest animate-marquee">
                 <span>GENERAL KNOWLEDGE</span> <span class="text-crimson">→</span>
@@ -522,7 +605,6 @@
                 <span>TECHNOLOGY</span> <span class="text-crimson">→</span>
                 <span>ARTIFICIAL INTELLIGENCE</span> <span class="text-crimson">→</span>
             </div>
-            <!-- Duplicate for smooth seamless loop -->
             <div class="marquee-content flex gap-8 font-orbitron font-black text-2xl md:text-3xl text-slate-200 uppercase tracking-widest animate-marquee" aria-hidden="true">
                 <span>GENERAL KNOWLEDGE</span> <span class="text-crimson">→</span>
                 <span>MOVIES</span> <span class="text-crimson">→</span>
@@ -541,7 +623,6 @@
     <section id="rounds" class="py-32 relative">
         <div class="max-w-7xl mx-auto px-6 space-y-20">
             
-            <!-- Section Header -->
             <div class="text-center space-y-4 max-w-3xl mx-auto">
                 <div class="font-mono text-xs text-crimson tracking-[0.3em] uppercase">// SYSTEM STAGES</div>
                 <h2 class="font-orbitron font-black text-4xl sm:text-5xl text-slate-100 tracking-wider">
@@ -552,17 +633,15 @@
                 </p>
             </div>
 
-            <!-- Timeline Vertical Line Container -->
-            <div class="relative border-l-2 border-crimson/30 ml-4 md:ml-1/2 space-y-16">
+            <div class="relative border-l-2 border-crimson/40 ml-4 md:ml-1/2 space-y-16">
                 
                 <!-- ROUND 01 -->
                 <div class="relative pl-8 md:pl-12 group">
-                    <!-- Timeline Dot -->
-                    <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-black border-2 border-crimson flex items-center justify-center text-crimson font-mono font-bold text-xs shadow-[0_0_15px_#FF003C]">
+                    <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-black border-2 border-crimson flex items-center justify-center text-crimson font-mono font-bold text-xs shadow-[0_0_20px_#FF003C]">
                         01
                     </div>
 
-                    <div class="hud-card p-8 rounded-2xl border border-white/15 bg-obsidian-card backdrop-blur-xl space-y-6">
+                    <div class="hud-card p-8 rounded-2xl border border-white/15 bg-obsidian-card backdrop-blur-2xl space-y-6">
                         <div class="flex flex-wrap items-center justify-between gap-4">
                             <div>
                                 <span class="font-mono text-xs text-crimson tracking-widest">// STAGE 01</span>
@@ -571,11 +650,16 @@
                                 </h3>
                             </div>
                             
-                            <!-- Stopwatch Graphic HUD -->
-                            <div class="flex items-center gap-3 px-5 py-2.5 rounded-xl border border-crimson/40 bg-crimson/10 font-mono text-crimson">
-                                <i data-lucide="timer" class="w-5 h-5 animate-pulse"></i>
-                                <span class="font-bold text-xl tracking-widest">05:00</span>
-                                <span class="text-[10px] uppercase tracking-wider text-slate-400">LIMIT</span>
+                            <!-- Interactive Stopwatch Controller -->
+                            <div class="flex flex-wrap items-center gap-3">
+                                <div class="flex items-center gap-3 px-5 py-2.5 rounded-xl border border-crimson/50 bg-crimson/10 font-mono text-crimson shadow-[0_0_15px_rgba(255,0,60,0.3)]">
+                                    <i data-lucide="timer" class="w-5 h-5 animate-pulse"></i>
+                                    <span id="round1-timer-display" class="font-bold text-xl tracking-widest">05:00</span>
+                                    <span class="text-[10px] uppercase tracking-wider text-slate-400">LIMIT</span>
+                                </div>
+                                <button id="timer-toggle-btn" class="p-2.5 rounded-xl bg-white/10 hover:bg-crimson text-white font-mono text-xs transition-colors">
+                                    START DEMO
+                                </button>
                             </div>
                         </div>
 
@@ -595,14 +679,14 @@
                                     </p>
                                 </div>
 
-                                <div class="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-1">
-                                    <div class="font-mono text-xs text-crimson uppercase font-bold flex items-center gap-2">
-                                        <i data-lucide="hand" class="w-4 h-4"></i>
-                                        <span>SUBMISSION PROTOCOL</span>
+                                <!-- Interactive Raise Hand Demo Button -->
+                                <div class="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-2">
+                                    <div class="font-mono text-xs text-crimson uppercase font-bold flex items-center justify-between">
+                                        <span class="flex items-center gap-2"><i data-lucide="hand" class="w-4 h-4"></i> SUBMISSION PROTOCOL</span>
                                     </div>
-                                    <p class="text-sm text-slate-300">
-                                        Use the <strong>Raise Hand</strong> feature in Google Meet upon completion.
-                                    </p>
+                                    <button id="raise-hand-demo-btn" class="w-full py-2 rounded-lg bg-crimson/20 border border-crimson/40 hover:bg-crimson text-white font-mono text-xs font-bold transition-all">
+                                        TEST "RAISE HAND" SIMULATION 🖐️
+                                    </button>
                                 </div>
                             </div>
 
@@ -615,12 +699,11 @@
 
                 <!-- ROUND 02 -->
                 <div class="relative pl-8 md:pl-12 group">
-                    <!-- Timeline Dot -->
-                    <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-black border-2 border-crimson flex items-center justify-center text-crimson font-mono font-bold text-xs shadow-[0_0_15px_#FF003C]">
+                    <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-black border-2 border-crimson flex items-center justify-center text-crimson font-mono font-bold text-xs shadow-[0_0_20px_#FF003C]">
                         02
                     </div>
 
-                    <div class="hud-card p-8 rounded-2xl border border-white/15 bg-obsidian-card backdrop-blur-xl space-y-6">
+                    <div class="hud-card p-8 rounded-2xl border border-white/15 bg-obsidian-card backdrop-blur-2xl space-y-6">
                         <div class="flex flex-wrap items-center justify-between gap-4">
                             <div>
                                 <span class="font-mono text-xs text-crimson tracking-widest">// STAGE 02</span>
@@ -643,7 +726,6 @@
                                 Participants must create an effective AI prompt that can generate the required poster. The best and fastest prompt will be declared the winner of the round.
                             </p>
 
-                            <!-- Futuristic Typing Visual Container -->
                             <div class="p-4 rounded-xl border border-crimson/30 bg-black/80 font-mono text-xs sm:text-sm text-slate-200 space-y-1">
                                 <div class="text-slate-500 text-[10px]">// SYNTHESIS CODE DEMO</div>
                                 <div class="text-crimson-glow font-bold">&gt; GENERATE_PROMPT();</div>
@@ -661,7 +743,7 @@
 
 
     <!-- ==================== 9. SPECIAL GUEST SECTION ==================== -->
-    <section class="py-24 relative overflow-hidden bg-black/40 border-y border-white/10">
+    <section class="py-24 relative overflow-hidden bg-black/60 border-y border-white/10">
         <div class="max-w-7xl mx-auto px-6 text-center space-y-12">
             
             <div class="space-y-2">
@@ -673,24 +755,21 @@
 
             <div class="inline-flex flex-col items-center space-y-6">
                 
-                <!-- Circular Holographic Frame -->
-                <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full flex items-center justify-center p-2 border-2 border-crimson/40 shadow-[0_0_40px_rgba(255,0,60,0.4)]">
-                    <div class="absolute inset-0 rounded-full border border-dashed border-crimson/60 animate-spin-slow"></div>
-                    <div class="absolute inset-2 rounded-full border border-white/10"></div>
+                <div class="relative w-52 h-52 sm:w-64 sm:h-64 rounded-full flex items-center justify-center p-2 border-2 border-crimson shadow-[0_0_50px_rgba(255,0,60,0.5)]">
+                    <div class="absolute inset-0 rounded-full border border-dashed border-crimson/70 animate-spin-slow"></div>
+                    <div class="absolute inset-2 rounded-full border border-white/15"></div>
                     
-                    <!-- Abstract Holographic Silhouette Mesh -->
-                    <div class="w-full h-full rounded-full bg-gradient-to-b from-crimson/20 via-black to-black flex flex-col items-center justify-center text-crimson overflow-hidden relative">
-                        <i data-lucide="user-check" class="w-20 h-20 text-slate-200 opacity-80"></i>
+                    <div class="w-full h-full rounded-full bg-gradient-to-b from-crimson/30 via-black to-black flex flex-col items-center justify-center text-crimson overflow-hidden relative">
+                        <i data-lucide="user-check" class="w-24 h-24 text-slate-200 opacity-90"></i>
                         <div class="absolute inset-0 bg-scanline pointer-events-none opacity-40"></div>
                     </div>
                 </div>
 
-                <!-- Guest Information -->
                 <div class="space-y-2">
                     <h3 class="font-orbitron font-bold text-3xl text-slate-100">
                         Dr. Aashiq Irfan
                     </h3>
-                    <div class="font-mono text-sm text-crimson-glow tracking-widest uppercase">
+                    <div class="font-mono text-sm text-crimson-glow tracking-widest uppercase font-semibold">
                         HOD OF AIDS DEPARTMENT
                     </div>
                 </div>
@@ -704,7 +783,6 @@
     <section id="register" class="py-32 relative">
         <div class="max-w-4xl mx-auto px-6 space-y-12">
             
-            <!-- Section Header -->
             <div class="text-center space-y-4">
                 <div class="font-mono text-xs text-crimson tracking-[0.3em] uppercase">// ACCESS TERMINAL</div>
                 <h2 class="font-orbitron font-black text-5xl text-slate-100 tracking-wider">
@@ -715,8 +793,7 @@
                 </p>
             </div>
 
-            <!-- Registration HUD Glass Panel Form -->
-            <div class="hud-panel p-8 sm:p-12 rounded-3xl border border-white/20 bg-obsidian-card backdrop-blur-2xl shadow-[0_0_80px_rgba(0,0,0,0.9)] space-y-8 relative">
+            <div class="hud-panel p-8 sm:p-12 rounded-3xl border border-white/20 bg-obsidian-card backdrop-blur-2xl shadow-[0_0_90px_rgba(0,0,0,0.95)] space-y-8 relative">
                 <div class="hud-corner top-left"></div>
                 <div class="hud-corner top-right"></div>
                 <div class="hud-corner bottom-left"></div>
@@ -724,14 +801,13 @@
 
                 <form id="registration-form" class="space-y-6" novalidate>
                     
-                    <!-- Full Name -->
                     <div class="space-y-2">
                         <label for="fullName" class="block font-mono text-xs text-slate-300 uppercase tracking-widest">
                             FULL NAME <span class="text-crimson">*</span>
                         </label>
                         <div class="relative">
                             <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name"
-                                class="hud-input w-full px-5 py-4 rounded-xl bg-black/60 border border-white/15 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all font-rajdhani text-lg">
+                                class="hud-input w-full px-5 py-4 rounded-xl bg-black/70 border border-white/20 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all font-rajdhani text-lg">
                             <span class="valid-icon absolute right-4 top-1/2 -translate-y-1/2 hidden text-emerald-400">
                                 <i data-lucide="check-circle-2" class="w-5 h-5"></i>
                             </span>
@@ -739,14 +815,13 @@
                         <p class="error-msg text-xs text-crimson font-mono hidden">Please enter a valid full name.</p>
                     </div>
 
-                    <!-- College Name -->
                     <div class="space-y-2">
                         <label for="collegeName" class="block font-mono text-xs text-slate-300 uppercase tracking-widest">
                             COLLEGE NAME <span class="text-crimson">*</span>
                         </label>
                         <div class="relative">
                             <input type="text" id="collegeName" name="collegeName" required placeholder="Enter your institution name"
-                                class="hud-input w-full px-5 py-4 rounded-xl bg-black/60 border border-white/15 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all font-rajdhani text-lg">
+                                class="hud-input w-full px-5 py-4 rounded-xl bg-black/70 border border-white/20 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all font-rajdhani text-lg">
                             <span class="valid-icon absolute right-4 top-1/2 -translate-y-1/2 hidden text-emerald-400">
                                 <i data-lucide="check-circle-2" class="w-5 h-5"></i>
                             </span>
@@ -754,14 +829,13 @@
                         <p class="error-msg text-xs text-crimson font-mono hidden">Please enter your college name.</p>
                     </div>
 
-                    <!-- Department -->
                     <div class="space-y-2">
                         <label for="department" class="block font-mono text-xs text-slate-300 uppercase tracking-widest">
                             DEPARTMENT <span class="text-crimson">*</span>
                         </label>
                         <div class="relative">
                             <input type="text" id="department" name="department" required placeholder="e.g., AIDS, CSE, ECE, IT"
-                                class="hud-input w-full px-5 py-4 rounded-xl bg-black/60 border border-white/15 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all font-rajdhani text-lg">
+                                class="hud-input w-full px-5 py-4 rounded-xl bg-black/70 border border-white/20 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all font-rajdhani text-lg">
                             <span class="valid-icon absolute right-4 top-1/2 -translate-y-1/2 hidden text-emerald-400">
                                 <i data-lucide="check-circle-2" class="w-5 h-5"></i>
                             </span>
@@ -769,16 +843,15 @@
                         <p class="error-msg text-xs text-crimson font-mono hidden">Please enter your department.</p>
                     </div>
 
-                    <!-- IEEE Interest -->
                     <div class="space-y-3">
                         <label class="block font-mono text-xs text-slate-300 uppercase tracking-widest">
                             ARE YOU INTERESTED IN JOINING IEEE? <span class="text-crimson">*</span>
                         </label>
                         <div class="grid grid-cols-2 gap-4">
-                            <button type="button" id="ieee-yes" class="ieee-toggle-btn px-6 py-4 rounded-xl border border-white/15 bg-black/60 text-slate-300 font-orbitron font-bold text-center hover:border-crimson transition-all">
+                            <button type="button" id="ieee-yes" class="ieee-toggle-btn px-6 py-4 rounded-xl border border-white/20 bg-black/70 text-slate-300 font-orbitron font-bold text-center hover:border-crimson transition-all">
                                 YES
                             </button>
-                            <button type="button" id="ieee-no" class="ieee-toggle-btn px-6 py-4 rounded-xl border border-white/15 bg-black/60 text-slate-300 font-orbitron font-bold text-center hover:border-crimson transition-all">
+                            <button type="button" id="ieee-no" class="ieee-toggle-btn px-6 py-4 rounded-xl border border-white/20 bg-black/70 text-slate-300 font-orbitron font-bold text-center hover:border-crimson transition-all">
                                 NO
                             </button>
                         </div>
@@ -786,14 +859,13 @@
                         <p id="ieee-error" class="error-msg text-xs text-crimson font-mono hidden">Please select an option.</p>
                     </div>
 
-                    <!-- WhatsApp Contact Number -->
                     <div class="space-y-2">
                         <label for="whatsapp" class="block font-mono text-xs text-slate-300 uppercase tracking-widest">
                             WHATSAPP CONTACT NUMBER <span class="text-crimson">*</span>
                         </label>
                         <div class="relative">
                             <input type="tel" id="whatsapp" name="whatsapp" required placeholder="10-digit mobile number"
-                                class="hud-input w-full px-5 py-4 rounded-xl bg-black/60 border border-white/15 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all font-rajdhani text-lg">
+                                class="hud-input w-full px-5 py-4 rounded-xl bg-black/70 border border-white/20 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all font-rajdhani text-lg">
                             <span class="valid-icon absolute right-4 top-1/2 -translate-y-1/2 hidden text-emerald-400">
                                 <i data-lucide="check-circle-2" class="w-5 h-5"></i>
                             </span>
@@ -801,14 +873,12 @@
                         <p class="error-msg text-xs text-crimson font-mono hidden">Please enter a valid 10-digit WhatsApp number.</p>
                     </div>
 
-                    <!-- Submit Button -->
                     <button type="submit" class="hud-button w-full py-5 text-center flex items-center justify-center gap-3 text-lg">
                         <span>SUBMIT REGISTRATION</span>
                         <i data-lucide="send" class="w-5 h-5"></i>
                     </button>
                 </form>
 
-                <!-- WhatsApp Official Group Banner -->
                 <div class="pt-8 border-t border-white/10 text-center space-y-4">
                     <div class="font-orbitron font-bold text-lg text-slate-100">
                         JOIN THE OFFICIAL WHATSAPP GROUP
@@ -831,12 +901,10 @@
     <div id="success-modal" class="fixed inset-0 z-[110] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center p-6 hidden">
         <div class="max-w-xl w-full text-center space-y-8 relative z-10">
             
-            <!-- Scanning Holographic Icon -->
-            <div class="w-28 h-28 mx-auto rounded-full border-2 border-crimson bg-crimson/10 flex items-center justify-center text-crimson shadow-[0_0_50px_#FF003C] animate-bounce-slow">
+            <div class="w-28 h-28 mx-auto rounded-full border-2 border-crimson bg-crimson/20 flex items-center justify-center text-crimson shadow-[0_0_60px_#FF003C] animate-bounce-slow">
                 <i data-lucide="shield-check" class="w-14 h-14"></i>
             </div>
 
-            <!-- Status Text Sequence -->
             <div class="space-y-3">
                 <div class="font-mono text-sm text-crimson tracking-[0.4em] uppercase font-bold animate-pulse">// ACCESS GRANTED</div>
                 <h2 class="font-orbitron font-black text-4xl sm:text-5xl text-slate-100 tracking-wider">
@@ -886,7 +954,6 @@
             
             <div class="flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
                 
-                <!-- Institutional Metadata -->
                 <div class="space-y-2">
                     <div class="font-orbitron font-black text-2xl text-slate-100 tracking-wider">
                         DOMAIN EXPANSION
@@ -901,12 +968,10 @@
                     </div>
                 </div>
 
-                <!-- Tagline -->
                 <div class="font-mono text-sm text-slate-300 tracking-widest uppercase max-w-md border-y md:border-y-0 md:border-l border-white/10 py-4 md:py-0 md:pl-8">
                     EXPAND YOUR KNOWLEDGE. CHALLENGE YOUR MIND.
                 </div>
 
-                <!-- Footer CTA Buttons -->
                 <div class="flex items-center gap-4">
                     <a href="#register" class="hud-button-sm">REGISTER</a>
                     <a href="https://chat.whatsapp.com/BQxrRM30fW37pIcgacgYNm?s=qt&p=a&mlu=4&ilr=4" target="_blank" rel="noopener noreferrer" class="hud-button-whatsapp-sm">WHATSAPP GROUP</a>
@@ -916,17 +981,15 @@
 
             <div class="pt-8 border-t border-white/5 text-center font-mono text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p>&copy; 2026 DOMAIN EXPANSION // IEEE SB JEPPIAAR ENGINEERING COLLEGE. ALL RIGHTS RESERVED.</p>
-                <p class="text-slate-600">AI COMMAND CENTER INTERFACE V2.0</p>
+                <p class="text-slate-600">QUANTUM AI COMMAND CENTER V3.0</p>
             </div>
 
         </div>
     </footer>
 
-
     <!-- Custom App Script -->
     <script src="app.js"></script>
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
     </script>
 </body>
