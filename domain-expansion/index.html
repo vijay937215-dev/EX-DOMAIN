@@ -73,9 +73,17 @@
         header { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 20px 5%; transition: var(--transition); display: flex; justify-content: space-between; align-items: center; }
         header.scrolled { padding: 10px 5%; background: var(--glass-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--glass-border); }
 
-        .logos { display: flex; gap: 15px; align-items: center; }
-        .logo-placeholder { height: 40px; width: 120px; background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #888; border-radius: 4px; }
-        .logo-placeholder img { max-height: 100%; max-width: 100%; object-fit: contain; }
+        .logos { display: flex; gap: 18px; align-items: center; }
+        .logo-placeholder { display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 4px; }
+        .logo-placeholder img { display: block; width: 100%; height: 100%; object-fit: contain; }
+        .college-logo { width: 230px; height: 58px; }
+        .ieee-logo { width: 118px; height: 66px; }
+
+        @media (max-width: 768px) {
+            .logos { gap: 8px; }
+            .college-logo { width: 155px; height: 40px; }
+            .ieee-logo { width: 78px; height: 44px; }
+        }
 
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a { font-family: var(--font-heading); font-size: 0.9rem; letter-spacing: 1px; transition: var(--transition); position: relative; }
@@ -307,9 +315,13 @@
     <!-- ================= PUBLIC APPLICATION ================= -->
     <div id="public-view">
         <header id="navbar">
-            <div class="logos">
-                <div class="logo-placeholder">[ COLLEGE LOGO ]</div>
-                <div class="logo-placeholder">[ IEEE LOGO ]</div>
+            <div class="logos" aria-label="Event organizers">
+                <div class="logo-placeholder college-logo">
+                    <img src="jpr-logo.png" alt="Jeppiaar Engineering College logo">
+                </div>
+                <div class="logo-placeholder ieee-logo">
+                    <img src="IEEE_logo.svg.webp" alt="IEEE Advancing Technology for Humanity logo">
+                </div>
             </div>
             
             <nav class="nav-links">
